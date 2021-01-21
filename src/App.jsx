@@ -14,8 +14,14 @@ class App extends Component {
     ],
     name: '',
   };
-
   nameInputId = uuidv4();
+
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+    console.log({ name, value });
+    this.setState({ [name]: value });
+  };
+
   render() {
     const { contacts, name } = this.state;
     return (
@@ -23,7 +29,13 @@ class App extends Component {
         <form>
           <label htmlFor={this.nameInputId}>
             Name
-            <input type="text" name="name" value={name} id={this.nameInputId} />
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.handleChange}
+              id={this.nameInputId}
+            />
           </label>
           <button type="submit">Add contact</button>
 
@@ -31,7 +43,7 @@ class App extends Component {
           <ul>
             <h2>Contacts</h2>
             {contacts.map(contact => (
-              <li key={contact.index}>{contact}</li>
+              <li>{contact.name}</li>
             ))}
           </ul>
         </form>
