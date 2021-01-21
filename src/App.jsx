@@ -26,6 +26,7 @@ class App extends Component {
     const { contacts, name } = this.state;
     return (
       <>
+        <h2>Phonebook</h2>
         <form>
           <label htmlFor={this.nameInputId}>
             Name
@@ -38,12 +39,10 @@ class App extends Component {
             />
           </label>
           <button type="submit">Add contact</button>
-
-          <br />
           <ul>
             <h2>Contacts</h2>
             {contacts.map(contact => (
-              <li>{contact.name}</li>
+              <li key={contact.id}>{contact.name}</li>
             ))}
           </ul>
         </form>
