@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import style from './Form.module.css';
+import PropTypes from 'prop-types';
+
+/* eslint react/prop-types: 1 */
 
 export default class Form extends Component {
+  static propTypes = {
+    onSubmitForm: PropTypes.func,
+  };
+
   state = { name: '', number: '' };
 
   nameInputId = uuidv4();
@@ -12,7 +20,7 @@ export default class Form extends Component {
     const { name, number } = this.state;
     console.log(name, number);
     if (name && number) {
-      this.props.onSubmit(this.state);
+      this.props.onSubmitForm(this.state);
     }
 
     this.reset();
@@ -31,8 +39,8 @@ export default class Form extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor={this.nameInputId}>
+      <form onSubmit={this.handleSubmit} className={style.container}>
+        <label htmlFor={this.nameInputId} className={style.item}>
           Name
           <input
             type="text"
@@ -42,7 +50,7 @@ export default class Form extends Component {
             id={this.nameInputId}
           />
         </label>
-        <label htmlFor={this.numberInputId}>
+        <label htmlFor={this.numberInputId} className={style.item}>
           Number
           <input
             type="tel"
